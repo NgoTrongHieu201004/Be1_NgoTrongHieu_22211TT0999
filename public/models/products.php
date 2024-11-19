@@ -92,5 +92,44 @@ class Products extends db
         }
         return $link;
     }
-
+    public function getSearchLimit($keys,$count,$page){
+        
+        $start =($page-1)*$count; 
+        $sql=self::$connection->prepare("SELECT * FROM `products` WHERE name LIKE ? LIMIT ?,?");
+        $key = "%$keys%";
+        $sql ->bind_param("sii",$key,$start,$count);
+        $sql -> execute();
+        $products = array();
+        $products = $sql -> get_result()->fetch_all(MYSQLI_ASSOC);
+        return $products ; 
+    }
+    public function getSearchAll($keys){
+        $sql=self::$connection->prepare("SELECT * FROM `products` WHERE name LIKE ?");
+        $key = "%$keys%";
+        $sql->bind_param("s",$key);
+        $sql->execute();
+        $products = array();
+        $products = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $products ; 
+    }
+    public function paginateVer3($url,$total,$perPage,$page,$offset,$key){
+       if($total <=0) return "";
+       $keys = trim($key);
+       $totalLink = ceil($total/$perPage);
+       if($totalLink<=1) return ""; 
+       $from = $page - $offset ; 
+       $to = $page +$offset ; 
+       if($from <=0){
+        $from = 1 ; 
+        $to = $offset*2;
+       }
+       if($to >$totalLink){
+        $to = $totalLink;
+       }
+       $links ="";
+       for($i = $from ; $i<$to ; $i++){
+        $links = $links."<li class='page-item  '><a class='page-link' href='result.php?keyfind=$keys&page=$i'> $i </a></li>";
+       }
+       return $links;
+    }
 }

@@ -29,6 +29,15 @@ $manu = new Manufactures();
                     <li class="nav-item"><a class="nav-link" href="cart.php"><i class="fas fa-shopping-cart me-1"></i>Giỏ hàng</a></li>
                     <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-phone me-1"></i>Liên hệ</a></li>
                 </ul>
+                <form action="result.php" method="get">
+                <div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
+                    <input type="text" name="keyfind" class="form-control border-0" placeholder="Tìm sản phẩm">
+                    <div class="input-group-append">
+                        <button type="submit" class="input-group-text bg-primary text-dark border-0 px-3"><i 
+                           style ="padding: 5px;"class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                </form>
             </div>
         </div>
     </nav>
