@@ -132,7 +132,7 @@
 
         .product-card .card-img-top {
             height: 450px;
-            object-fit: cover;
+            object-fit: scale-down;
             transition: transform 0.3s ease;
         }
 
