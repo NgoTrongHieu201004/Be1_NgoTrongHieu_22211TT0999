@@ -127,39 +127,22 @@
                      <?php } ?>
                        <!-- Comment List Start -->
                     <div class="mb-3">
+                        <?php $length = random_int(0,3) ?>
                         <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">3 Bình luận</h4>
+                            <h4 class="m-0 text-uppercase font-weight-bold "><?php echo $length ;?> Bình luận</h4>
                         </div>
                         <div class="bg-white border border-top-0 p-4">
+                            <?php  for ($i = 0 ; $i < $length ; $i++){?>
                             <div class="media mb-4">
                                 <img src="public/img/icon_avatar.png" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                 <div class="media-body">
-                                    <h6><a class="text-secondary font-weight-bold" href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
+                                    <h6><a class="text-secondary " style = "font-weight: bold; text-decoration: none;" href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
                                     <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
                                         accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
                                     <button class="btn btn-sm btn-outline-secondary">Reply</button>
                                 </div>
                             </div>
-                            <div class="media">
-                                <img src="public/img/icon_avatar.png" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                <div class="media-body">
-                                    <h6><a class="text-secondary font-weight-bold" href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                                    <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                        accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                    <button class="btn btn-sm btn-outline-secondary">Reply</button>
-                                    <div class="media mt-4">
-                                        <img src="public/img/icon_avatar.png" alt="Image" class="img-fluid mr-3 mt-1"
-                                            style="width: 45px;">
-                                        <div class="media-body">
-                                            <h6><a class="text-secondary font-weight-bold" href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor
-                                                labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed
-                                                eirmod ipsum.</p>
-                                            <button class="btn btn-sm btn-outline-secondary">Reply</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                           <?php }?>
                         </div>
                     </div>
                         <!-- Comment List End -->

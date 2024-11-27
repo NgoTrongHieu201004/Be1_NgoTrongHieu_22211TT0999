@@ -51,16 +51,8 @@
                     <ul class="nav nav-pills">
                       
                     <?php 
-                    if (isset($_GET['type-id'])) {
-                        $type_id = $_GET['type-id'];
-                        // Nếu không có tham số 'manu-id', gán mặc định là 1
-                        $manu_id = isset($_GET['manu-id']) ? $_GET['manu-id'] : 1;
-                       
-                    } else {
-                      
-                        $type_id = 1;
-                        $manu_id = 1;
-                    }
+                    $type_id = isset($_GET['type-id'])?$_GET['type-id']:1;
+                    $manu_id = isset($_GET['manu-id']) ? $_GET['manu-id'] : 1;
                     
                     foreach($manu->HienThiManu() as $x): ?>
 
@@ -82,7 +74,13 @@
                     <div class="tab-pane fade show active" id="apple-phone">
                         <div class="row g-4">
                         <?php
-                        foreach($products->getProductsByTypeAndManu($manu_id,$type_id) as $a=>$values):
+                        $url = $_SERVER['PHP_SELF'];
+                        $page = (isset($_GET['page']))?$_GET['page']:1; 
+                        $offset = 3 ; 
+                        $perPage = 6 ;                       
+                        $total = count( $products->getProductsByTypeAndManu($manu_id, $type_id));
+                         $PaginateVer4 = $products->PaginateVer4($url , $total , $perPage , $offset , $page, $manu_id, $type_id);
+                        foreach($products->getProductsByTypeAndManuLimit($manu_id, $type_id,$page,$perPage) as $key=>$values):
     
                         ?>
                             <div class="col-md-4 fade-in">
@@ -128,15 +126,7 @@
             <div class="col-12">
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Trước</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Sau</a>
-                        </li>
+                      <?php echo $PaginateVer4 ; ?>
                     </ul>
                 </nav>
             </div>
