@@ -19,6 +19,7 @@
     border: 1px solid #dee2e6;
     border-left: 5px solid #3491d0;
   }
+  
     </style>
 </head>
 <body>
@@ -85,7 +86,7 @@
                                 echo "không có kết quả ";
                             }else{
                                 $url = $_SERVER['PHP_SELF'];
-                                $perPage = 2 ; 
+                                $perPage = 3 ; 
                                 $page = (isset($_GET['page']))?$_GET['page']:1;
                                 $offset = 3;
                                 $total = count($getSearchAll);

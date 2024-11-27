@@ -246,4 +246,8 @@ body {
         width: 100%;
         margin-top: 1rem;
     }
+    
 }
+.media-body {
+    flex: 1;
+  }
