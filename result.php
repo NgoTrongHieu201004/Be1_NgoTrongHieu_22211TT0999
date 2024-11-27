@@ -101,7 +101,7 @@
                                     </div>
                                     <div class="card-body">
                                    
-                                    <a class="h5 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none" href="single.php"><?php echo $values['name'] ?></a>
+                                    <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none" href="single.php?id=<?php echo $values['id'] ?>"><?php echo $values['name'] ?></a>
                                         
                                         <div class="price-tag"><?php echo number_format($values['price'], 0, '', '.'); ?>₫</div>
                                         <button class="btn btn-cart">

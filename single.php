@@ -110,13 +110,14 @@
                      <div class="col fade-in">
                              <div class="card product-card">
                                  <div class="position-relative">
-                                     <img src="public/img/<?php echo $values['image']; ?>" class="center img-fluid" alt="iPhone 14 Pro Max">
+                                     <img src="public/img/<?php echo $values['image']; ?>" class="center img-fluid" alt="ảnh">
                                      <span class="product-badge">Mới</span>
                                  </div>
                                  <div class="card-body">
                                 
-                                 <a class="h5 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none" href="single.php"><?php echo $values['name'] ?></a>           
+                                 <a class="h1 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none" href="single.php?id=<?php echo $values['id'] ?>"><?php echo $values['name'] ?></a>       
                                      <div class="price-tag"><?php echo number_format($values['price'], 0, '', '.'); ?>₫</div>
+                                     <h5><?php echo $values['description'] ?></h5>
                                      <button class="btn btn-cart">
                                          <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ
                                      </button>
@@ -127,7 +128,7 @@
                        <!-- Comment List Start -->
                     <div class="mb-3">
                         <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">3 Comments</h4>
+                            <h4 class="m-0 text-uppercase font-weight-bold">3 Bình luận</h4>
                         </div>
                         <div class="bg-white border border-top-0 p-4">
                             <div class="media mb-4">
