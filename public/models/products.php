@@ -128,7 +128,7 @@ class Products extends db
        }
        $links ="";
        for($i = $from ; $i<$to ; $i++){
-        $links = $links."<li class='page-item  '><a class='page-link' href='result.php?keyfind=$keys&page=$i'> $i </a></li>";
+        $links = $links."<li class='page-item '><a class='page-link ' href='result.php?keyfind=$keys&page=$i'> $i </a></li>";
        }
        return $links;
     }

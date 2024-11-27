@@ -99,7 +99,8 @@
                                         <span class="product-badge">Mới</span>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><?php echo $values['name'] ;?></h5>
+                                   
+                                    <a class="h5 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none" href="single.php"><?php echo $values['name'] ?></a>
                                         
                                         <div class="price-tag"><?php echo number_format($values['price'], 0, '', '.'); ?>₫</div>
                                         <button class="btn btn-cart">
@@ -112,6 +113,7 @@
                         <div class="col-12">
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
+                        
                         <?php echo $paginationVer3; ?>
                     </ul>
                 </nav>

@@ -18,7 +18,6 @@
     <!-- Category Header -->
     <div class="container my-4">
         <div class="category-header text-center">
-            <h1 class="display-4 fw-bold mb-3">Danh Mục Sản Phẩm</h1>
             <p class="lead mb-0">Khám phá các sản phẩm công nghệ chất lượng cao với giá tốt nhất</p>
         </div>
     </div>
@@ -78,70 +77,19 @@
                 </div>
 
                 <div class="tab-content">
-                    <!-- Apple Phones -->
-                    <div class="tab-pane fade show active" id="apple-phone">
-                        <div class="row g-4">
-                        <?php
-                        foreach($products->getProductsByTypeAndManu($manu_id,$type_id) as $a=>$values):
-    
-                        ?>
-                            <div class="col-md-4 fade-in">
-                                <div class="card product-card">
-                                    <div class="position-relative">
-                                        <img src="public/img/<?php echo $values['image'] ?>" class="card-img-top" alt="iPhone 14 Pro Max">
-                                        <span class="product-badge">Mới</span>
-                                    </div>
-                                    <div class="card-body">
-                                        <a class="h5 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none" href="single.php"><?php echo $values['name'] ?></a>
-                                        
-                                        <div class="price-tag"><?php echo number_format($values['price'], 0, '', '.') ?>₫</div>
-                                        <button class="btn btn-cart">
-                                            <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach ?>
-
-                            <!-- Thêm sản phẩm Apple khác tương tự -->
-                        </div>
-                    </div>
-
-                    <!-- Samsung Phones -->
-                   
+                    
                 </div>
             </div>
 
             <!-- Laptop Content -->
-            <div class="tab-pane fade" id="laptop" role="tabpanel">
-                <!-- Tương tự như phần điện thoại -->
-            </div>
+           
 
             <!-- Accessory Content -->
-            <div class="tab-pane fade" id="accessory" role="tabpanel">
-                <!-- Tương tự như phần điện thoại -->
-            </div>
+           
         </div>
     </div>
     <!-- Pagination -->
-    <div class="row mt-5">
-            <div class="col-12">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Trước</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Sau</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
+  
 
  <!-- Footer -->
  <?php include "footer.php" ?>

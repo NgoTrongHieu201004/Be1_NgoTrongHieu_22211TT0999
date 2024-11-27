@@ -74,7 +74,7 @@
                         <span class="category-badge"><?php echo $type->HienThiMotType($values['type_id'])[0]['name_type'] ?></span>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $values['name']?></h5>
+                        <a class="h5 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none" href="single.php"><?php echo $values['name'] ?></a>
                         <p class="card-text">Chip A17 Pro, Camera 48MP, Pin 4422 mAh</p>
                         <div class="price-tag"><?php echo number_format($values['price'], 0, '', '.') ?>₫</div>
                         <button class="btn btn-primary w-100"><i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ</button>
