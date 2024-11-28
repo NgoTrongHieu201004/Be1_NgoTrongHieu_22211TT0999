@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 21, 2024 lúc 02:34 AM
+-- Thời gian đã tạo: Th10 28, 2024 lúc 01:51 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -177,6 +177,29 @@ INSERT INTO `protypes` (`id_type`, `name_type`, `icon`) VALUES
 (4, 'Phụ Kiện', 'fas fa-mouse me-2'),
 (5, 'Âm Thanh', 'fas fa-headphones me-2');
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `role` int(11) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`, `created_at`) VALUES
+(3, 'aa', '$2y$10$lrOfILJv1blqb5Zifr4gFulc/tAhGqoWfDEQTYihidDmiBY3MI9ea', 'buonthimikkhoc@gmail.com', 0, '2024-11-22 11:27:41'),
+(4, '123', '$2y$10$foJRwlx6YeyQ/UEtylh0J.Q56X8BHx5Ltp/tIf1CRXh8qHtHpc8Wq', '22211tt2302@mail.tdc.edu.vn', 0, '2024-11-22 11:34:58');
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
@@ -200,6 +223,13 @@ ALTER TABLE `protypes`
   ADD PRIMARY KEY (`id_type`);
 
 --
+-- Chỉ mục cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -220,6 +250,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `protypes`
   MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
