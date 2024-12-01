@@ -19,6 +19,7 @@
     border: 1px solid #dee2e6;
     border-left: 5px solid #3491d0;
   }
+  
     </style>
 </head>
 <body>
@@ -85,7 +86,7 @@
                                 echo "không có kết quả ";
                             }else{
                                 $url = $_SERVER['PHP_SELF'];
-                                $perPage = 2 ; 
+                                $perPage = 3 ; 
                                 $page = (isset($_GET['page']))?$_GET['page']:1;
                                 $offset = 3;
                                 $total = count($getSearchAll);
@@ -99,7 +100,8 @@
                                         <span class="product-badge">Mới</span>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><?php echo $values['name'] ;?></h5>
+                                   
+                                    <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none" href="single.php?id=<?php echo $values['id'] ?>"><?php echo $values['name'] ?></a>
                                         
                                         <div class="price-tag"><?php echo number_format($values['price'], 0, '', '.'); ?>₫</div>
                                         <button class="btn btn-cart">
@@ -112,6 +114,7 @@
                         <div class="col-12">
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
+                        
                         <?php echo $paginationVer3; ?>
                     </ul>
                 </nav>

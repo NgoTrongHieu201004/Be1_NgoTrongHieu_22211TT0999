@@ -41,6 +41,18 @@ class Products extends db
         return $items; // Trả về mảng các sản phẩm
     }
 
+    public function getProductsByTypeAndManuLimit($manu_id, $type_id,$page,$perPage)
+    {
+        $start = ($page-1)*$perPage;
+        $sql = self::$connection->prepare("SELECT * FROM products WHERE manu_id = ? AND type_id = ? LIMIT ?,?");
+
+        $sql->bind_param("iiii", $manu_id, $type_id,$start,$perPage); // "ii" biểu thị 2 tham số kiểu integer
+        $sql->execute(); // Thực thi câu lệnh SQL
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; // Trả về mảng các sản phẩm
+    }
+
 
     public function getFeaturedItem($start, $count)
     {
@@ -131,10 +143,57 @@ class Products extends db
             $to = $totalLink;
         }
         $links = "";
-
+        $prevLinks = "" ; 
+        $nextLinks = "";
+        if($page > 1){
+            $prev = $page -1 ; 
+            $prevLinks = "<li class='page-item  '><a class='page-link' href='result.php?keyfind=$keys&page=$prev'> Trước </a></li>";
+        }
+        if($page < $totalLink){
+            $next = $page+1; 
+            $nextLinks = "<li class='page-item  '><a class='page-link' href='result.php?keyfind=$keys&page=$next'> Tiếp </a></li>";
+        }
         for ($i = $from; $i < $to; $i++) {
             $links = $links . "<li class='page-item  '><a class='page-link' href='result.php?keyfind=$keys&page=$i'> $i </a></li>";
         }
-        return $links;
+        return $prevLinks.$links.$nextLinks;
+    }
+    public function PaginateVer4($url , $total , $perPage , $offset , $page , $manu_id, $type_id){
+        if($total <=0) {return "";} 
+        $totalLinks = ceil($total/$perPage);
+        if($totalLinks <=1) {return "" ; }
+        $from = $page -$offset ; 
+        $to = $page + $offset ; 
+        if($from <= 0 ){
+            $from = 1 ; 
+            $to = $offset * 2 ; 
+        }
+        if($to >$totalLinks){
+            $to = $totalLinks;
+        }
+        $link = "";
+        $prevLink = "";
+        $nextLink = "";
+        if($page > 1){
+            $prev = $page-1 ; 
+            $prevLink = "<li class='page-item  '><a class='page-link' href='sanpham.php?page=$prev&manu-id=$manu_id&type-id=$type_id'> Trước </a></li>";
+        }
+        if($page < $totalLinks){
+           $next = $page+1 ; 
+           $nextLink = "<li class='page-item  '><a class='page-link' href='sanpham.php?page=$next&manu-id=$manu_id&type-id=$type_id'> Tiếp </a></li>";
+        }
+        for($i = $from ; $i < $to ; $i++){
+            $link = $link."<li class='page-item  '><a class='page-link' href='sanpham.php?page=$i&manu-id=$manu_id&type-id=$type_id'> $i </a></li>";
+        }
+        return $prevLink.$link.$nextLink;
+        
+    }
+    public function detailItems($id){
+        $sql = self::$connection->prepare("SELECT * FROM `products` WHERE id = ?");
+        $sql -> bind_param("i",$id);
+        $sql ->execute();
+        $products = array();
+        $products = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $products;
     }
 }

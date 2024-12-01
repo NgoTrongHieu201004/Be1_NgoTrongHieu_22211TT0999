@@ -51,16 +51,8 @@
                     <ul class="nav nav-pills">
                       
                     <?php 
-                    if (isset($_GET['type-id'])) {
-                        $type_id = $_GET['type-id'];
-                        // Nếu không có tham số 'manu-id', gán mặc định là 1
-                        $manu_id = isset($_GET['manu-id']) ? $_GET['manu-id'] : 1;
-                       
-                    } else {
-                      
-                        $type_id = 1;
-                        $manu_id = 1;
-                    }
+                    $type_id = isset($_GET['type-id'])?$_GET['type-id']:1;
+                    $manu_id = isset($_GET['manu-id']) ? $_GET['manu-id'] : 1;
                     
                     foreach($manu->HienThiManu() as $x): ?>
 
@@ -82,7 +74,13 @@
                     <div class="tab-pane fade show active" id="apple-phone">
                         <div class="row g-4">
                         <?php
-                        foreach($products->getProductsByTypeAndManu($manu_id,$type_id) as $a=>$values):
+                        $url = $_SERVER['PHP_SELF'];
+                        $page = (isset($_GET['page']))?$_GET['page']:1; 
+                        $offset = 3 ; 
+                        $perPage = 6 ;                       
+                        $total = count( $products->getProductsByTypeAndManu($manu_id, $type_id));
+                         $PaginateVer4 = $products->PaginateVer4($url , $total , $perPage , $offset , $page, $manu_id, $type_id);
+                        foreach($products->getProductsByTypeAndManuLimit($manu_id, $type_id,$page,$perPage) as $key=>$values):
     
                         ?>
                             <div class="col-md-4 fade-in">
@@ -92,7 +90,7 @@
                                         <span class="product-badge">Mới</span>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><?php echo $values['name'] ?></h5>
+                                        <a class="h5 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none" href="single.php?id=<?php echo $values['id'] ?>"><?php echo $values['name'] ?></a>
                                         
                                         <div class="price-tag"><?php echo number_format($values['price'], 0, '', '.') ?>₫</div>
                                         <button class="btn btn-cart">
@@ -108,40 +106,7 @@
                     </div>
 
                     <!-- Samsung Phones -->
-                    <div class="tab-pane fade" id="samsung-phone">
-                        <div class="row g-4">
-                            <div class="col-md-4 fade-in">
-                                <div class="card product-card">
-                                    <div class="position-relative">
-                                        <img src="/api/placeholder/400/300" class="card-img-top" alt="Samsung S23 Ultra">
-                                        <span class="product-badge">Hot</span>
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Samsung Galaxy S23 Ultra</h5>
-                                        <div class="product-specs">
-                                            <div class="spec-item">
-                                                <i class="fas fa-microchip spec-icon"></i>
-                                                <span>Snapdragon 8 Gen 2</span>
-                                            </div>
-                                            <div class="spec-item">
-                                                <i class="fas fa-memory spec-icon"></i>
-                                                <span>12GB RAM</span>
-                                            </div>
-                                            <div class="spec-item">
-                                                <i class="fas fa-hdd spec-icon"></i>
-                                                <span>256GB</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-tag">26.990.000₫</div>
-                                        <button class="btn btn-cart">
-                                            <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Thêm sản phẩm Samsung khác tương tự -->
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
 
@@ -161,15 +126,7 @@
             <div class="col-12">
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Trước</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Sau</a>
-                        </li>
+                      <?php echo $PaginateVer4 ; ?>
                     </ul>
                 </nav>
             </div>
