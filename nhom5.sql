@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 28, 2024 lúc 01:51 AM
+-- Thời gian đã tạo: Th12 01, 2024 lúc 05:09 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `nhom5`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `carts`
+--
+
+CREATE TABLE `carts` (
+  `id_user` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `soluong` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `carts`
+--
+
+INSERT INTO `carts` (`id_user`, `id_product`, `soluong`) VALUES
+(5, 76, 1),
+(5, 10, 2);
 
 -- --------------------------------------------------------
 
@@ -198,7 +218,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`, `created_at`) VALUES
 (3, 'aa', '$2y$10$lrOfILJv1blqb5Zifr4gFulc/tAhGqoWfDEQTYihidDmiBY3MI9ea', 'buonthimikkhoc@gmail.com', 0, '2024-11-22 11:27:41'),
-(4, '123', '$2y$10$foJRwlx6YeyQ/UEtylh0J.Q56X8BHx5Ltp/tIf1CRXh8qHtHpc8Wq', '22211tt2302@mail.tdc.edu.vn', 0, '2024-11-22 11:34:58');
+(4, '123', '$2y$10$foJRwlx6YeyQ/UEtylh0J.Q56X8BHx5Ltp/tIf1CRXh8qHtHpc8Wq', '22211tt2302@mail.tdc.edu.vn', 0, '2024-11-22 11:34:58'),
+(5, 'Duy Huỳnh', '$2y$10$o3XP6Fn3UGQ3kN/LOTAy6unAwzx0d7//jEr0pwNVG6vqI0awe1Q9e', 'duyhuynh19042004@gmail.com', 1, '2024-12-01 10:30:15'),
+(6, 'Duy', '$2y$10$6DkywTgSFULAeo/V6kj6ue5WMVbfpeY8bQg74cwfVjx95QtohPkhq', 'duy@gmail.com', 0, '2024-12-01 11:07:14');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -255,7 +277,7 @@ ALTER TABLE `protypes`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
