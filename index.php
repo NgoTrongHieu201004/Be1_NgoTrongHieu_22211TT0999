@@ -7,46 +7,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/style.css">   
-    <!-- Thêm CSS tùy chỉnh cho các nút -->
-     <!-- Thêm CSS tùy chỉnh cho các nút -->
-     <style>
-        /* CSS tùy chỉnh cho các nút */
-        .btn-custom {
-            background-color: #2c3e50;  /* Màu nền xanh đen */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
 
-        .btn-custom:hover {
-            background-color: #3498db;  /* Màu nền xanh sáng khi hover */
-            color: white;
-        }
-    </style>
 </head>
 <body> 
-    <?php session_start(); ?>
+    
 
     <!-- Navbar -->
     <?php include "header.php";?>
 
-    <div class="container mt-3">
-        <div class="row align-items-center justify-content-between">
-            <div class="col-auto">
-                <?php
-                // Kiểm tra xem có thông báo từ URL không
-                if (isset($_GET['message'])) {
-                    echo "<div class='alert alert-success' role='alert'>" . htmlspecialchars($_GET['message']) . "</div>";
-                }
-                ?>
-            </div>
-            <div class="col-auto">            
-            </div>
-        </div>
-    </div>
+ 
 
     <!-- Banner -->
     <div class="container">

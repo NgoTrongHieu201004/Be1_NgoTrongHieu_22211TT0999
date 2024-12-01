@@ -24,6 +24,7 @@
  margin-right: auto;
  width: auto;
 }
+
     </style>
 </head>
 <body>
@@ -192,7 +193,6 @@
            
         </div>
     </div>
-    <!-- Pagination -->
   
 
  <!-- Footer -->

@@ -1,5 +1,4 @@
 <?php
-session_start(); // Bắt đầu session
 
 // Kiểm tra xem người dùng đã đăng nhập chưa
 $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
@@ -16,23 +15,6 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
     <link rel="stylesheet" href="public/css/stylesanpham.css">
      <!-- Thêm CSS tùy chỉnh cho các nút -->
      <!-- Thêm CSS tùy chỉnh cho các nút -->
-     <style>
-        /* CSS tùy chỉnh cho các nút */
-        .btn-custom {
-            background-color: #2c3e50;  /* Màu nền xanh đen */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        .btn-custom:hover {
-            background-color: #3498db;  /* Màu nền xanh sáng khi hover */
-            color: white;
-        }
-    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -109,9 +91,11 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
                                         <a class="h5 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none" href="single.php?id=<?php echo $values['id'] ?>"><?php echo $values['name'] ?></a>
                                         
                                         <div class="price-tag"><?php echo number_format($values['price'], 0, '', '.') ?>₫</div>
-                                        <button class="btn btn-cart">
+                                        <a href="./public/xulyCRUD/xulythemcart.php?idUser=<?php echo $_SESSION['user_id'] ?>&idProduct=<?php echo $values['id'] ?>">
+                                        <button type="submit" name="submit"  class="btn btn-cart">
                                             <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ
                                         </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -139,16 +123,12 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
     <!-- Nút Đăng Xuất -->
     <div class="container text-center mt-4">
         <?php if ($isLoggedIn): ?>
-            <form action="logout.php" method="post">
-                <button type="submit" class="btn btn-danger">Đăng Xuất</button>
-            </form>
-        <?php else: ?>
             <p>Vui lòng <a href="login.php">đăng nhập</a> để tiếp tục.</p>
         <?php endif; ?>
     </div>
 
-    <!-- Pagination -->
-    <div class="row mt-5">
+     <!-- Pagination -->
+     <div class="row mt-5">
             <div class="col-12">
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
