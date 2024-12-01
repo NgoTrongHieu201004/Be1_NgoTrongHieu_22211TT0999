@@ -1,3 +1,10 @@
+<?php
+session_start(); // Bắt đầu session
+
+// Kiểm tra xem người dùng đã đăng nhập chưa
+$isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -7,8 +14,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/stylesanpham.css">
-    <style>
-        
+     <!-- Thêm CSS tùy chỉnh cho các nút -->
+     <!-- Thêm CSS tùy chỉnh cho các nút -->
+     <style>
+        /* CSS tùy chỉnh cho các nút */
+        .btn-custom {
+            background-color: #2c3e50;  /* Màu nền xanh đen */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #3498db;  /* Màu nền xanh sáng khi hover */
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -27,19 +50,16 @@
     <div class="container">
         <!-- Tabs -->
         <ul class="nav nav-tabs" id="productTabs" role="tablist">
-
         <?php  
         foreach($type->HienThiType() as $x):
-           
         ?>
             <li class="nav-item" role="presentation">
-            <a class="btn" href="sanpham.php?type-id=<?php echo $x['id_type'] ?>">
-                <button class="nav-link " id="phone-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab">
-                  <i class="<?php echo $x['icon'] ?>"></i><?php echo $x['name_type'] ?>
-                </button>
+                <a class="btn" href="sanpham.php?type-id=<?php echo $x['id_type'] ?>">
+                    <button class="nav-link" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab">
+                      <i class="<?php echo $x['icon'] ?>"></i><?php echo $x['name_type'] ?>
+                    </button>
                 </a>
             </li>
-            
         <?php endforeach ?>
         </ul>
 
@@ -49,23 +69,19 @@
             <div class="tab-pane fade show active" id="phone" role="tabpanel">
                 <div class="text-center mb-4">
                     <ul class="nav nav-pills">
-                      
                     <?php 
                     $type_id = isset($_GET['type-id'])?$_GET['type-id']:1;
                     $manu_id = isset($_GET['manu-id']) ? $_GET['manu-id'] : 1;
                     
                     foreach($manu->HienThiManu() as $x): ?>
-
                         <li class="nav-item">
-                        <a class="btn" href="sanpham.php?type-id=<?php echo $type_id ?>&manu-id=<?php echo $x['id_manu'] ?>">
-                            <button class="nav-link " data-bs-toggle="tab" data-bs-target="#apple-phone">
-                                <?php echo $x['name_manu'] ?>
-                            </button>
-                    </a>
+                            <a class="btn" href="sanpham.php?type-id=<?php echo $type_id ?>&manu-id=<?php echo $x['id_manu'] ?>">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#apple-phone">
+                                    <?php echo $x['name_manu'] ?>
+                                </button>
+                            </a>
                         </li>
-                        <?php endforeach ?>
-                        
-
+                    <?php endforeach ?>
                     </ul>
                 </div>
 
@@ -100,8 +116,6 @@
                                 </div>
                             </div>
                         <?php endforeach ?>
-
-                            <!-- Thêm sản phẩm Apple khác tương tự -->
                         </div>
                     </div>
 
@@ -121,6 +135,18 @@
             </div>
         </div>
     </div>
+
+    <!-- Nút Đăng Xuất -->
+    <div class="container text-center mt-4">
+        <?php if ($isLoggedIn): ?>
+            <form action="logout.php" method="post">
+                <button type="submit" class="btn btn-danger">Đăng Xuất</button>
+            </form>
+        <?php else: ?>
+            <p>Vui lòng <a href="login.php">đăng nhập</a> để tiếp tục.</p>
+        <?php endif; ?>
+    </div>
+
     <!-- Pagination -->
     <div class="row mt-5">
             <div class="col-12">
@@ -133,8 +159,8 @@
         </div>
     </div>
 
- <!-- Footer -->
- <?php include "footer.php" ?>
+    <!-- Footer -->
+    <?php include "footer.php" ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js"></script>
 </body>

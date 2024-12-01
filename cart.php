@@ -1,3 +1,10 @@
+<?php
+session_start(); // Bắt đầu session
+
+// Kiểm tra xem người dùng đã đăng nhập chưa
+$isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -7,8 +14,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/stylecart.css">
-    <style>
-       
+     <!-- Thêm CSS tùy chỉnh cho các nút -->
+     <!-- Thêm CSS tùy chỉnh cho các nút -->
+     <style>
+        /* CSS tùy chỉnh cho các nút */
+        .btn-custom {
+            background-color: #2c3e50;  /* Màu nền xanh đen */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #3498db;  /* Màu nền xanh sáng khi hover */
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -97,6 +120,19 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Nút Đăng Xuất -->
+            <?php if ($isLoggedIn): ?>
+                <div class="text-center mt-4">
+                    <form action="logout.php" method="post">
+                        <button type="submit" class="btn btn-danger">Đăng Xuất</button>
+                    </form>
+                </div>
+            <?php else: ?>
+                <div class="text-center mt-4">
+                    <p>Vui lòng <a href="login.php">đăng nhập</a> để tiếp tục.</p>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 
