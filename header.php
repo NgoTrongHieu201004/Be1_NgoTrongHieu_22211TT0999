@@ -12,6 +12,14 @@ $products = new Products();
 $type = new Protypes();
 $manu = new Manufactures();
 $cart = new Carts();
+
+if (isset( $_SESSION['user_id'])) {
+    # code...
+    $idUser = $_SESSION['user_id'];
+}
+else{
+    $idUser = 0 ;
+}
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
@@ -93,14 +101,14 @@ $cart = new Carts();
 
 <script>
     function clearCartCount() {
-    fetch('.public/xulyCRUD/clear_cart_count.php')  // Gọi file PHP để cập nhật session
+    fetch('./public/xulyCRUD/clear_cart_count.php')  // Gọi file PHP để cập nhật session
         .then(response => response.text())
         .then(data => {
             console.log(data);  // Xem phản hồi từ server (nếu cần thiết)
             // Ẩn badge nếu giỏ hàng trống
             const badge = document.querySelector('.badge.bg-danger');
             if (badge) {
-                badge.style.display = 'none';  // Ẩn badge sau khi xóa
+                  badge.style.display = 'none';
             }
         });
 }

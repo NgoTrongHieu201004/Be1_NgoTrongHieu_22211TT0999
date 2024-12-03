@@ -119,9 +119,11 @@
                                  <a class="h1 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none" href="single.php?id=<?php echo $values['id'] ?>"><?php echo $values['name'] ?></a>       
                                      <div class="price-tag"><?php echo number_format($values['price'], 0, '', '.'); ?>₫</div>
                                      <h5><?php echo $values['description'] ?></h5>
+                                     <a href="./public/xulyCRUD/xulythemcart.php?idUser=<?php echo $idUser ?>&idProduct=<?php echo $values['id'] ?>">
                                      <button class="btn btn-cart">
                                          <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ
                                      </button>
+                                     </a>
                                  </div>
                              </div>
                          </div>

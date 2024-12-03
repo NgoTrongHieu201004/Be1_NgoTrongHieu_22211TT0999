@@ -11,7 +11,8 @@ if (isset($_GET['idUser']) && isset($_GET['idProduct'])) {
    $soluong = 1;
    $cart = new Carts();
    
-   $cartUser = $cart->HienThiMotCart_User($id_user, $id_product);
+   if ($id_user != 0) {
+      $cartUser = $cart->HienThiMotCart_User($id_user, $id_product);
    if ($cartUser) {
       $soluong += 1; // Cộng thêm số lượng hiện tại
       $cart->SuaCart($id_user, $id_product, $soluong);
@@ -24,6 +25,13 @@ if (isset($_GET['idUser']) && isset($_GET['idProduct'])) {
       $_SESSION['new_cart_count'] = 0;
   }
   $_SESSION['new_cart_count'] += 1;
+   }
+   else {
+   // Chuyển hướng kèm theo thông báo
+   header('location:../../sanpham.php?messagethongbao=Yêu cầu bạn đăng nhập tài khoản');
+   exit();
+   }
+   
 
    header('location:../../sanpham.php');
 }
@@ -31,3 +39,4 @@ if (isset($_GET['idUser']) && isset($_GET['idProduct'])) {
 
 
 ?>
+tại sao lại không hiển thị 

@@ -2,6 +2,14 @@
 
 // Kiểm tra xem người dùng đã đăng nhập chưa
 $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
+
+
+
+if (isset($_GET['messagethongbao'])) {
+    $message = $_GET['messagethongbao'];
+    echo "<script>alert('$message');</script>";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +99,7 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
                                         <a class="h5 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none" href="single.php?id=<?php echo $values['id'] ?>"><?php echo $values['name'] ?></a>
                                         
                                         <div class="price-tag"><?php echo number_format($values['price'], 0, '', '.') ?>₫</div>
-                                        <a href="./public/xulyCRUD/xulythemcart.php?idUser=<?php echo $_SESSION['user_id'] ?>&idProduct=<?php echo $values['id'] ?>">
+                                        <a href="./public/xulyCRUD/xulythemcart.php?idUser=<?php echo $idUser ?>&idProduct=<?php echo $values['id'] ?>">
                                         <button type="submit" name="submit"  class="btn btn-cart">
                                             <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ
                                         </button>
@@ -122,7 +130,7 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
 
     <!-- Nút Đăng Xuất -->
     <div class="container text-center mt-4">
-        <?php if ($isLoggedIn): ?>
+        <?php if (!$isLoggedIn): ?>
             <p>Vui lòng <a href="login.php">đăng nhập</a> để tiếp tục.</p>
         <?php endif; ?>
     </div>

@@ -21,7 +21,6 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
     <?php include "header.php" ?>
 
     <?php 
-        $idUser = $_SESSION['user_id'];
         $cartUser = $cart->HienThiCart_User($idUser);
         $Tong = 0;
         foreach ($cartUser as $value) {
@@ -64,8 +63,7 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
     <span class="price" data-unit-price="<?php echo $x['price']; ?>">
         <?php echo number_format($x['price'] * $value['soluong'], 0, '', '.'); ?> ₫
     </span>
-</div>
-
+    </div>
                         <div class="col-md-2">
                             <div class="quantity-control">
                                 <button class="quantity-btn" onclick="decreaseQuantity(this, <?php echo $x['id']; ?>)">-</button>
