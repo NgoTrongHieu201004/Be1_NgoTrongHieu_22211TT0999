@@ -128,13 +128,6 @@ if (isset($_GET['messagethongbao'])) {
         </div>
     </div>
 
-    <!-- Nút Đăng Xuất -->
-    <div class="container text-center mt-4">
-        <?php if (!$isLoggedIn): ?>
-            <p>Vui lòng <a href="login.php">đăng nhập</a> để tiếp tục.</p>
-        <?php endif; ?>
-    </div>
-
      <!-- Pagination -->
      <div class="row mt-5">
             <div class="col-12">
