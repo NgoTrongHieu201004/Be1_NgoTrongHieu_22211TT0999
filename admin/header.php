@@ -93,7 +93,7 @@
                 </li>
                 <li class=""><a title="" href="#"><i class="icon icon-cog"></i>
                         <span class="text">Settings</span></a></li>
-                <li class=""><a title="" href="logoutadmin.php"><i class="icon
+                <li class=""><a title="" href="../index.php"><i class="icon
                             icon-share-alt"></i> <span class="text">Logout</span></a>
                 </li>
             </ul>
