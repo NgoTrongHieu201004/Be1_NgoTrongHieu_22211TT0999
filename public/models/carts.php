@@ -60,18 +60,5 @@ class Carts extends db
     }
 
 
-    // Hàm đếm số lượng sản phẩm trong giỏ hàng
-    public function DemSoLuongCart($id_user)
-    {
-        $sql = "SELECT SUM(soluong) AS tong_soluong FROM carts WHERE id_user = ?";
-        $stmt = self::$connection->prepare($sql);
-        $stmt->bind_param("i", $id_user);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $data = $result->fetch_assoc();
-
-        return $data['tong_soluong'] ?? 0; // Trả về 0 nếu không có sản phẩm
-    }
-
 
 }

@@ -16,7 +16,7 @@ include "sidebar.php";
             <div class="span12">
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"><a
-                                href="form.html"> <i class="icon-plus"></i>
+                                href="form_add_item.php"> <i class="icon-plus"></i>
                             </a></span>
                         <h5>Items</h5>
                     </div>
