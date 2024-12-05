@@ -32,7 +32,6 @@ if (isset($_GET['id'])) {
                                    table-striped">
                             <thead>
                                 <tr>
-                                    <th>User Id</th>
                                     <th>Username</th>
                                     <th>Password</th>
                                     <th>Role</th>
@@ -44,28 +43,28 @@ if (isset($_GET['id'])) {
                                     $user->DeleteUser($_GET['id']);
                                 } ?>
                                 <?php foreach ($getAllItem = $user->getAllUser() as $values) {
+                                    $quyen = "user";
+                                    if ($values['role'] === 1) {
+                                        $quyen = "admin";
+                                    }
                                     ?>
                                     <tr class="">
-                                        <td><?php echo $values['id']; ?></td>
+                                    
                                         <td><?php echo $values['username']; ?></td>
                                         <td>*****</td>
-                                        <td><?php echo $values['role']; ?></td>
+                                        <td><?php echo $quyen ?></td>
 
                                         <td>
-                                            <?php if ($values['role'] != 100) { ?>
+                                            <?php if ($values['role'] != 1) { ?>
                                                 <a href="edit.html?id=<?php echo $values['id']; ?>"
                                                     class="btn btn-success btn-mini">Edit</a>
-                                            <?php } else { ?>
-                                                <span class="btn btn-success btn-mini" style="cursor: not-allowed;">Cannot
-                                                    Edit</span>
-                                            <?php } ?>
-                                            <?php if ($values['role'] != 100) { ?>
+                                            <?php }  ?>
+                                               
+                                            <?php if ($values['role'] != 1) { ?>
                                                 <a href="users.php?id=<?php echo $values['id']; ?>"
                                                     class="btn btn-danger btn-mini">Delete</a>
-                                            <?php } else { ?>
-                                                <span class="btn btn-danger btn-mini" style="cursor: not-allowed;">Cannot
-                                                    Delete</span>
-                                            <?php } ?>
+                                            <?php }  ?>
+                                                
                                         </td>
                                     </tr>
                                 <?php } ?>

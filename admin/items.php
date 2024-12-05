@@ -40,7 +40,7 @@ include "sidebar.php";
                             <?php if(isset($_GET['id'])){
                                 $products->DeleteProducts($_GET['id']);
                             } ?>
-                                 <?php  foreach($getAllItem = $products->getAllProducts() as $values){?>
+                                 <?php  foreach($getAllItem = $products->HienThiSanPhamMoiAdmin() as $values){?>
                                     
                                 <tr class="">
                                     <td width="250">

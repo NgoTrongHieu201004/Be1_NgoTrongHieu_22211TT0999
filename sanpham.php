@@ -87,7 +87,7 @@ if (isset($_GET['messagethongbao'])) {
                             $url = $_SERVER['PHP_SELF'];
                             $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
                             $offset = 3;
-                            $perPage = 6;
+                            $perPage = 3;
                             $total = count($products->getProductsByTypeAndManu($manu_id, $type_id));
                             $PaginateVer4 = $products->PaginateVer4($url, $total, $perPage, $offset, $page, $manu_id, $type_id);
                             foreach ($products->getProductsByTypeAndManuLimit($manu_id, $type_id, $page, $perPage) as $key => $values):
@@ -116,8 +116,7 @@ if (isset($_GET['messagethongbao'])) {
                                             <div class="price-tag">
                                                 <?php echo number_format($values['price'], 0, '', '.') ?>₫
                                             </div>
-                                            <a
-                                                href="./public/xulyCRUD/xulythemcart.php?idUser=<?php echo $idUser ?>&idProduct=<?php echo $values['id'] ?>">
+                                            <a href="./public/xulyCRUD/xulythemcart.php?idUser=<?php echo $idUser ?>&idProduct=<?php echo $values['id'] ?>">
                                                 <button type="submit" name="submit" class="btn btn-cart">
                                                     <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ
                                                 </button>
@@ -151,7 +150,7 @@ if (isset($_GET['messagethongbao'])) {
         <div class="col-12">
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
-                    <?php echo $PaginateVer4; ?>
+                    <?php echo  $PaginateVer4; ?>
                 </ul>
             </nav>
         </div>

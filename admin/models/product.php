@@ -14,6 +14,13 @@ class Product extends Db{
         $sql ->execute();
        
     }
+    public function HienThiSanPhamMoiAdmin(){
+        $sql = self::$connection->prepare("SELECT * FROM products ORDER BY create_at DESC");
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
     
    
     

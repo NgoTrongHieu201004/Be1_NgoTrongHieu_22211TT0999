@@ -20,6 +20,7 @@ class Products extends db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
+   
     public function HienThiSanPhamMoi($start, $count)
     {
         $sql = self::$connection->prepare("SELECT * FROM products ORDER BY create_at DESC LIMIT ?,?");
@@ -158,36 +159,59 @@ class Products extends db
         }
         return $prevLinks.$links.$nextLinks;
     }
-    public function PaginateVer4($url , $total , $perPage , $offset , $page , $manu_id, $type_id){
-        if($total <=0) {return "";} 
-        $totalLinks = ceil($total/$perPage);
-        if($totalLinks <=1) {return "" ; }
-        $from = $page -$offset ; 
-        $to = $page + $offset ; 
-        if($from <= 0 ){
-            $from = 1 ; 
-            $to = $offset * 2 ; 
-        }
-        if($to >$totalLinks){
-            $to = $totalLinks;
-        }
-        $link = "";
-        $prevLink = "";
-        $nextLink = "";
-        if($page > 1){
-            $prev = $page-1 ; 
-            $prevLink = "<li class='page-item  '><a class='page-link' href='sanpham.php?page=$prev&manu-id=$manu_id&type-id=$type_id'> Trước </a></li>";
-        }
-        if($page < $totalLinks){
-           $next = $page+1 ; 
-           $nextLink = "<li class='page-item  '><a class='page-link' href='sanpham.php?page=$next&manu-id=$manu_id&type-id=$type_id'> Tiếp </a></li>";
-        }
-        for($i = $from ; $i < $to ; $i++){
-            $link = $link."<li class='page-item  '><a class='page-link' href='sanpham.php?page=$i&manu-id=$manu_id&type-id=$type_id'> $i </a></li>";
-        }
-        return $prevLink.$link.$nextLink;
-        
+    public function PaginateVer4($url, $total, $perPage, $offset, $page, $manu_id, $type_id) {
+    // Nếu tổng số sản phẩm <= 0, không có phân trang
+    if ($total <= 0) return "";
+
+    // Tổng số trang
+    $totalLinks = ceil($total / $perPage);
+
+    // Nếu chỉ có 1 trang, không cần phân trang
+    if ($totalLinks <= 1) return "";
+
+    // Điều chỉnh $page nằm trong phạm vi hợp lệ
+    if ($page < 1) $page = 1;
+    if ($page > $totalLinks) $page = $totalLinks;
+
+    // Xác định phạm vi trang hiển thị
+    $from = $page - $offset;
+    $to = $page + $offset;
+
+    // Đảm bảo $from và $to không vượt quá giới hạn
+    if ($from < 1) {
+        $from = 1;
+        $to = min($offset * 2, $totalLinks);
     }
+    if ($to > $totalLinks) {
+        $to = $totalLinks;
+        $from = max(1, $totalLinks - $offset * 2 + 1);
+    }
+
+    // Liên kết trước
+    $prevLink = "";
+    if ($page > 1) {
+        $prev = $page - 1;
+        $prevLink = "<li class='page-item'><a class='page-link' href='sanpham.php?page=$prev&manu-id=$manu_id&type-id=$type_id'>Trước</a></li>";
+    }
+
+    // Liên kết tiếp
+    $nextLink = "";
+    if ($page < $totalLinks) {
+        $next = $page + 1;
+        $nextLink = "<li class='page-item'><a class='page-link' href='sanpham.php?page=$next&manu-id=$manu_id&type-id=$type_id'>Tiếp</a></li>";
+    }
+
+    // Tạo các liên kết phân trang
+    $link = "";
+    for ($i = $from; $i <= $to; $i++) {
+        $activeClass = ($i == $page) ? " active" : ""; // Trang hiện tại
+        $link .= "<li class='page-item$activeClass'><a class='page-link' href='sanpham.php?page=$i&manu-id=$manu_id&type-id=$type_id'>$i</a></li>";
+    }
+
+    // Trả về chuỗi HTML hoàn chỉnh
+    return $prevLink . $link . $nextLink;
+}
+
     public function detailItems($id){
         $sql = self::$connection->prepare("SELECT * FROM `products` WHERE id = ?");
         $sql -> bind_param("i",$id);

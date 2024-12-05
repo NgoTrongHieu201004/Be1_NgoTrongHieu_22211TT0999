@@ -19,24 +19,24 @@ include "sidebar.php";
                     </div>
                     <div class="widget-content nopadding">
                         <!-- BEGIN FORM -->
-                        <form action="xulyCRUD_admin/xulyThem.php" method="post" class="form-horizontal" enctype="multipart/form-data">
+                        <form action="addItem.php" method="post" class="form-horizontal" enctype="multipart/form-data">
                             <div class="control-group">
-                                <label class="control-label">Title </label>
+                                <label class="control-label">Name</label>
                                 <div class="controls">
-                                    <input type="text" class="span11" name="title" /> *
+                                    <input type="text" class="span11" name="name" /> *
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Excerpt</label>
+                                <label class="control-label">Descriptions</label>
                                 <div class="controls">
-                                    <textarea class="span11" name="excerpt"></textarea>
+                                    <textarea class="span11" name="description"></textarea>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">Content</label>
+                                <label class="control-label">Price</label>
                                 <div class="controls">
-                                    <textarea class="span11" name="content"></textarea>
+                                <input type="text" class="span11" name="price" /> *
                                 </div>
                             </div>
                             <div class="control-group">
@@ -48,11 +48,25 @@ include "sidebar.php";
                             </div>
                             <div class="control-group">
                                 <label class="control-label">Choose a
-                                    category</label>
+                                    Manufactures</label>
                                 <div class="controls">
-                                    <select name="cate" id="cate">
-                                        <option value="1">The Gioi</option>
-                                        <option value="2">The Thao</option>
+                                    <select name="manu" id="manu">
+                                        <?php foreach($manufacture->getAllManu() as $value){?>
+                                        <option value="<?php echo $value['id_manu'] ?>"><?php echo $value['name_manu'] ?></option>
+                                       
+                                        <?php } ?>
+                                    </select> *
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Choose a
+                                    Protypes</label>
+                                <div class="controls">
+                                    <select name="type" id="type">
+                                    <?php foreach($protype->getAllProtypes() as $value){?>
+                                        <option value="<?php echo $value['id_type'] ?>"><?php echo $value['name_type'] ?></option>
+                                       
+                                        <?php } ?>
                                     </select> *
                                 </div>
                             </div>
@@ -66,22 +80,7 @@ include "sidebar.php";
                                     </select> *
                                 </div>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label">View
-                                </label>
-                                <div class="controls">
-                                    <input type="number" class="span11" name="view" /> *
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">Author</label>
-                                <div class="controls">
-                                    <select name="author" id="cate">
-                                        <option value="1">The Gioi</option>
-                                        <option value="2">The Thao</option>
-                                    </select> *
-                                </div>
-                            </div>
+                           
                             <div class="form-actions">
                                 <button type="submit" class="btn btn-success">Add</button>
                             </div>
