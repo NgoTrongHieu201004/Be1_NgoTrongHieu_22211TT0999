@@ -68,7 +68,7 @@ else{
         
         echo "<span class='navbar-text'> ". htmlspecialchars($_SESSION['username']) . "</span>";
         if($_SESSION['role'] == 1){
-            echo '<a href="public/admin/index.html" class="btn btn-custom btn-sm ms-1 btn-success">Admin</a>';
+            echo '<a href="admin/index.php" class="btn btn-custom btn-sm ms-1 btn-success">Admin</a>';
         }
         echo '<a href="logout.php" class="btn btn-custom btn-sm ms-1 btn-outline-danger">Đăng xuất</a>';
         

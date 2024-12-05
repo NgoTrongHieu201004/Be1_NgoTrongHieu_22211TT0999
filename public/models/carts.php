@@ -2,8 +2,9 @@
 
 class Carts extends db
 {
-    public function ThemCart($id_user,$id_product,$soluong){
-        $sql=self::$connection->query("INSERT INTO carts(id_user,id_product,soluong) values ('$id_user','$id_product','$soluong')");
+    public function ThemCart($id_user, $id_product, $soluong)
+    {
+        $sql = self::$connection->query("INSERT INTO carts(id_user,id_product,soluong) values ('$id_user','$id_product','$soluong')");
     }
     public function HienThiCarts()
     {
@@ -23,14 +24,16 @@ class Carts extends db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
-    public function HienThiMotCart_User($id_user, $id_product) {
+    public function HienThiMotCart_User($id_user, $id_product)
+    {
         $sql = self::$connection->prepare("SELECT * FROM carts WHERE id_user = ? AND id_product = ?");
         $sql->bind_param("ii", $id_user, $id_product);
         $sql->execute();
         $result = $sql->get_result();
         return $result->fetch_assoc();  // Trả về một mảng hoặc null nếu không tìm thấy.
     }
-    public function XoaCart($id_user, $id_product) {
+    public function XoaCart($id_user, $id_product)
+    {
         // Chuẩn bị câu lệnh SQL với dấu hỏi thay cho tham số
         $sql = self::$connection->prepare("DELETE FROM carts WHERE id_user = ? AND id_product = ?");
         $sql->bind_param("ii", $id_user, $id_product);
@@ -43,7 +46,8 @@ class Carts extends db
         $sql->close();
     }
 
-    public function SuaCart($id_user, $id_product, $soluong) {
+    public function SuaCart($id_user, $id_product, $soluong)
+    {
         $sql = self::$connection->prepare("UPDATE carts SET soluong = ? WHERE id_user = ? AND id_product = ?");
         $sql->bind_param("iii", $soluong, $id_user, $id_product);
         $sql->execute();
@@ -57,7 +61,8 @@ class Carts extends db
 
 
     // Hàm đếm số lượng sản phẩm trong giỏ hàng
-    public function DemSoLuongCart($id_user) {
+    public function DemSoLuongCart($id_user)
+    {
         $sql = "SELECT SUM(soluong) AS tong_soluong FROM carts WHERE id_user = ?";
         $stmt = self::$connection->prepare($sql);
         $stmt->bind_param("i", $id_user);
@@ -67,8 +72,6 @@ class Carts extends db
 
         return $data['tong_soluong'] ?? 0; // Trả về 0 nếu không có sản phẩm
     }
-    
-    
-    
-    
+
+
 }
