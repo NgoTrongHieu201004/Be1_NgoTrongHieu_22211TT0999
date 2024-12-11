@@ -22,6 +22,7 @@ if($_SESSION['role'] != 1){
         <link rel="stylesheet" href="css/matrix-style.css" />
         <link rel="stylesheet" href="css/matrix-media.css" />
         <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link
             href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'
             rel='stylesheet' type='text/css'>
@@ -49,12 +50,10 @@ if($_SESSION['role'] != 1){
         require "models/product.php";
         require "models/manufacture.php";
         require "models/protype.php";
-        require "models/category.php";
         require "models/user.php";
         $products = new Product; 
         $manufacture = new Manufacture; 
         $protype = new Protype ; 
-        $categories = new Categories();
         $user = new User();
         ?>
         <!--Header-part-->

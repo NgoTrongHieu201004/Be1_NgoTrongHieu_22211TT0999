@@ -42,6 +42,13 @@
     transform: translateY(-2px);
 }
 
+.nav-link.active {
+    background-color: #007bff; /* Màu xanh dương (hoặc màu bạn muốn) */
+    color: white; /* Chữ màu trắng */
+    font-weight: bold; /* Tô đậm chữ */
+}
+
+
 .banner {
     background: linear-gradient(45deg, #2193b0, #6dd5ed);
     color: white;

@@ -160,6 +160,23 @@ if (isset($_GET['messagethongbao'])) {
     <!-- Footer -->
     <?php include "footer.php" ?>
 
+    <script>
+    // Chọn tất cả các nút trong danh sách
+    const buttons = document.querySelectorAll('#productTabs .nav-link');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Xóa lớp 'active' khỏi tất cả các nút
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Thêm lớp 'active' vào nút được nhấn
+            this.classList.add('active');
+        });
+    });
+    
+</script>
+
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
 

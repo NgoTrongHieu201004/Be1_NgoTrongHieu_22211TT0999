@@ -9,5 +9,15 @@ class Manufacture extends Db{
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
+    public function HienThiMotManu($id)
+    {
+        $sql = self::$connection->prepare("SELECT * FROM manufactures WHERE id_manu = ?");
+        $sql->bind_param("i", $id);
+        $sql->execute();
+        return $sql->get_result()->fetch_assoc(); // Trả về một dòng dưới dạng mảng liên kết
+    }
+
+    
+    
     
 }

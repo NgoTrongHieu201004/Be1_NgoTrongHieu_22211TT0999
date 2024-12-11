@@ -16,23 +16,23 @@ include "sidebar.php";
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"><a href="form.html"> <i class="icon-plus"></i>
                             </a></span>
-                        <h5>Categories</h5>
+                        <h5>Manufacture</h5>
                     </div>
                     <div class="widget-content nopadding">
                         <table class="table table-bordered
                                     table-striped">
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>image</th>
                                     <th>Name</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if (isset($_GET['id_manu'])) {
-                                    $categories->Delete($_GET['id_manu']);
+                                    $manufacture->Delete($_GET['id_manu']);
                                 } ?>
-                                <?php foreach ($getAllItem = $categories->getAllCate() as $values) {
+                                <?php foreach ($getAllItem = $manufacture->getAllManu() as $values) {
                                     $imageName = strtolower(str_replace(' ', '_', $values['name_manu'])) . '.jpg';
                                     ?>
                                     <tr class="">
