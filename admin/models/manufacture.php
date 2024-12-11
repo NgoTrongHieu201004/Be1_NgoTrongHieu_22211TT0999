@@ -16,7 +16,12 @@ class Manufacture extends Db{
         $sql->execute();
         return $sql->get_result()->fetch_assoc(); // Trả về một dòng dưới dạng mảng liên kết
     }
-
+    function DeleteManu($id) {
+        $sql = self::$connection->prepare("DELETE FROM `manufactures` WHERE `id_manu` = ?");
+        $sql->bind_param("i", $id);
+        $sql->execute();
+    }
+    
     
     
     

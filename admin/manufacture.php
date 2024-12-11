@@ -14,7 +14,7 @@ include "sidebar.php";
         <div class="row-fluid">
             <div class="span12">
                 <div class="widget-box">
-                    <div class="widget-title"> <span class="icon"><a href="form.html"> <i class="icon-plus"></i>
+                    <div class="widget-title"> <span class="icon"><a href="form_add_manu.php"> <i class="icon-plus"></i>
                             </a></span>
                         <h5>Manufacture</h5>
                     </div>
@@ -30,21 +30,20 @@ include "sidebar.php";
                             </thead>
                             <tbody>
                                 <?php if (isset($_GET['id_manu'])) {
-                                    $manufacture->Delete($_GET['id_manu']);
+                                    $manufacture->DeleteManu($_GET['id_manu']);
                                 } ?>
                                 <?php foreach ($getAllItem = $manufacture->getAllManu() as $values) {
-                                    $imageName = strtolower(str_replace(' ', '_', $values['name_manu'])) . '.jpg';
+                                    $imageName = strtolower(str_replace(' ', '_', $values['icon']));
                                     ?>
                                     <tr class="">
                                         <td width="100"> <img src="../public/img/<?php echo $imageName; ?>"
-                                                alt="<?php echo $values['name_manu']; ?>" width="100" /></td>
+                                                alt="<?php echo $values['icon']; ?>" width="100" /></td>
                                         <td><?php echo $values['name_manu']; ?></td>
 
                                         <td>
-                                            <a href="items.php?id=" class="btn
+                                            <a href="edit_manu.php?id_manu=<?php echo $values['id_manu']; ?>" class="btn
                                     btn-success btn-mini">Edit</a>
-                                            <a href="categories.php?id=<?php echo $values['id_manu']; ?>" class="btn
-                                                    btn-danger btn-mini">Delete</a>
+                                    <a href="#" class="btn btn-danger btn-mini" onclick="confirmDelete(<?php echo $values['id_manu']; ?>)">Delete</a>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -65,5 +64,13 @@ include "sidebar.php";
     </div>
 </div>
 </div>
+<script type="text/javascript">
+    // Hàm hiển thị hộp thoại xác nhận
+    function confirmDelete(id_manu) {
+        if (confirm("Bạn có muốn xóa manufacture này?")) {
+            window.location.href = "manufacture.php?id_manu=" + id_manu; // Chuyển hướng đến trang xóa
+        }
+    }
+</script>
 <!-- END CONTENT -->
 <?php include "footer.php" ?>
