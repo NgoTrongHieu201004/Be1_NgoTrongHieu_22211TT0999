@@ -52,7 +52,7 @@ include "sidebar.php";
                                             <img src="../public/img/<?php echo $values['image']; ?>" />
                                         </td>
                                         <td><?php echo $values['name']; ?></td>
-                                        <td><?php echo $values['description']; ?></td>
+                                        <td><?php echo substr($values['description'],0,200) ; ?></td>
                                         <td><?php echo $manufacture->HienThiMotManu($values['manu_id'])['name_manu']; ?>
                                         </td>
                                         <td><?php echo $values['feature']; ?></td>
@@ -60,7 +60,7 @@ include "sidebar.php";
                                         <td><?php echo $protype->HienThiMotType($values['type_id'])['name_type']; ?></td>
                                         <td><?php echo $values['create_at']; ?></td>
                                         <td>
-                                            <a href="./update_product.php?id_product=<?php echo $values['id']; ?>" class="btn
+                                            <a style = "margin: 10px;" href="./update_product.php?id_product=<?php echo $values['id']; ?>" class="btn
                                                     btn-success btn-mini">Edit</a>
                                             <a href="#"
                                             onclick="confirmDelete(<?php echo $values['id']; ?>)" class="btn

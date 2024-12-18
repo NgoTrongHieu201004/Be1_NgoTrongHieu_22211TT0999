@@ -120,21 +120,21 @@ class Product extends Db
         $prevLink = "";
         if ($page > 1) {
             $prev = $page - 1;
-            $prevLink = "<li class='page-item'><a class='page-link' href='$url?page=$prev'>Trước</a></li>";
+            $prevLink = "<li class='page-item'><a class='page-link' href='$url&page=$prev'>Trước</a></li>";
         }
 
         // Liên kết tiếp
         $nextLink = "";
         if ($page < $totalLinks) {
             $next = $page + 1;
-            $nextLink = "<li class='page-item'><a class='page-link' href='$url?page=$next'>Tiếp</a></li>";
+            $nextLink = "<li class='page-item'><a class='page-link' href='$url&page=$next'>Tiếp</a></li>";
         }
 
         // Tạo các liên kết phân trang
         $link = "";
         for ($i = $from; $i <= $to; $i++) {
             $activeClass = ($i == $page) ? " active" : ""; // Trang hiện tại
-            $link .= "<li class='page-item$activeClass'><a class='page-link' href='$url?page=$i'>$i</a></li>";
+            $link .= "<li class='page-item$activeClass'><a class='page-link' href='$url&page=$i'>$i</a></li>";
         }
 
         // Trả về chuỗi HTML hoàn chỉnh
@@ -142,5 +142,25 @@ class Product extends Db
     }
 
 
+     public function SreachAllItemBy($key){
+        $name = '%'.$key.'%';
+        $sql = self::$connection->prepare("SELECT * FROM `products` WHERE name like ? ");
+        $sql->bind_param('s',$name);
+        $sql->execute();
+        $products = array();
+        $products = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $products;
+     }
+     public function SreachLimitItem($key,$page,$count){
+        $start = ($page-1)*$count;
+        $name = '%'.$key.'%';
+        $sql = self::$connection->prepare("SELECT * FROM `products` WHERE name like ? LIMIT ?,? ");
+        $sql->bind_param('sii',$name,$start, $count );
+        $sql->execute();
+        $products = array();
+        $products = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $products;
+     }
+     
 
 }

@@ -108,8 +108,8 @@ if($_SESSION['role'] != 1){
         </div>
         <!--start-top-serch-->
         <div id="search">
-            <form action="result.html" method="get">
-                <input type="text" placeholder="Search here..." />
+            <form action="result.php" method="get">
+                <input type="text" name="key"  style = "height: 34px;  width: 250px;" placeholder="Search here..." />
                 <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
             </form>  
         </div>
