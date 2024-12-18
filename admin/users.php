@@ -2,15 +2,6 @@
 include "header.php";
 include "sidebar.php";
 ?>
-<?php
-if (isset($_GET['id'])) {
-    $result = $user->DeleteUser($_GET['id']);
-    if ($result) {
-        echo '<p style="color: red;">' . $result . '</p>';
-    }
-}
-?>
-
 <!-- BEGIN CONTENT -->
 <div id="content">
     <div id="content-header">
@@ -23,7 +14,7 @@ if (isset($_GET['id'])) {
         <div class="row-fluid">
             <div class="span12">
                 <div class="widget-box">
-                    <div class="widget-title"> <span class="icon"><a href="form.html"> <i class="icon-plus"></i>
+                    <div class="widget-title"> <span class="icon"><a href="form_add_user.php"> <i class="icon-plus"></i>
                             </a></span>
                         <h5>Products</h5>
                     </div>
@@ -39,7 +30,8 @@ if (isset($_GET['id'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (isset($_GET['id'])) {
+                                <?php
+                                if (isset($_GET['id'])) {
                                     $user->DeleteUser($_GET['id']);
                                 } ?>
                                 <?php foreach ($getAllItem = $user->getAllUser() as $values) {
@@ -49,26 +41,25 @@ if (isset($_GET['id'])) {
                                     }
                                     ?>
                                     <tr class="">
-                                    
                                         <td><?php echo $values['username']; ?></td>
                                         <td>*****</td>
                                         <td><?php echo $quyen ?></td>
 
                                         <td>
                                             <?php if ($values['role'] != 1) { ?>
-                                                <a href="edit.html?id=<?php echo $values['id']; ?>"
+                                                <a href="edit_user.php?id=<?php echo $values['id']; ?>"
                                                     class="btn btn-success btn-mini">Edit</a>
                                             <?php }  ?>
                                                
                                             <?php if ($values['role'] != 1) { ?>
-                                                <a href="users.php?id=<?php echo $values['id']; ?>"
-                                                    class="btn btn-danger btn-mini">Delete</a>
+                                                <!-- Cập nhật nút Delete để gọi hàm xác nhận -->
+                                                <a href="#" class="btn btn-danger btn-mini" 
+                                                   onclick="confirmDelete(<?php echo $values['id']; ?>)">Delete</a>
                                             <?php }  ?>
-                                                
+                                                 
                                         </td>
                                     </tr>
                                 <?php } ?>
-
                             </tbody>
                         </table>
                         <div class="row" style="margin-left: 18px;">
@@ -85,4 +76,14 @@ if (isset($_GET['id'])) {
     </div>
 </div>
 <!-- END CONTENT -->
+
+<script type="text/javascript">
+    // Hàm hiển thị hộp thoại xác nhận
+    function confirmDelete(id) {
+        if (confirm("Bạn có muốn xóa user?")) {
+            window.location.href = "users.php?id=" + id; // Chuyển hướng đến trang xóa
+        }
+    }
+</script>
+
 <?php include "footer.php" ?>
