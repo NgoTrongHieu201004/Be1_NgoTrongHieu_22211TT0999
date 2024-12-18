@@ -8,6 +8,8 @@
                         <span>Product</span></a></li>
                 <li> <a href="manufacture.php"><i class="icon icon-th-list"></i>
                         <span>Manufacture</span></a></li>
+                        <li> <a href="protype.php"><i class="icon icon-th-list"></i>
+                        <span>ProType</span></a></li>
                 <li> <a href="users.php"><i class="icon icon-th-list"></i>
                         <span>Users</span></a></li>
 

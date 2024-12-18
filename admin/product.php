@@ -62,8 +62,8 @@ include "sidebar.php";
                                         <td>
                                             <a href="./update_product.php?id_product=<?php echo $values['id']; ?>" class="btn
                                                     btn-success btn-mini">Edit</a>
-                                            <a href="./xulyCRUD_admin/xulyXoa.php?id_product=<?php echo $values['id']; ?>"
-                                                class="btn
+                                            <a href="#"
+                                            onclick="confirmDelete(<?php echo $values['id']; ?>)" class="btn
                                                     btn-danger btn-mini">Delete</a>
 
                                         </td>
@@ -90,3 +90,10 @@ include "sidebar.php";
 </div>
 <!-- END CONTENT -->
 <?php include "footer.php" ?>
+<script>
+      function confirmDelete(id) {
+        if (confirm("Bạn có muốn xóa Product này?")) {
+            window.location.href = "./xulyCRUD_admin/xulyXoa.php?id_product=" + id; // Chuyển hướng đến trang xóa
+        }
+    }
+</script>

@@ -6,12 +6,14 @@ require "./public/models/products.php";
 require "./public/models/manufactures.php";
 require "./public/models/protypes.php";
 require "./public/models/carts.php";
+require "./public/models/thanhtoan.php";
 // Không cần gọi lại session_start() ở đây nếu đã gọi trong config.php
 
 $products = new Products();
 $type = new Protypes();
 $manu = new Manufactures();
 $cart = new Carts();
+$donhang = new ThanhToan();
 
 if (isset( $_SESSION['user_id'])) {
     # code...
@@ -47,7 +49,7 @@ else{
     </a>
 </li>
 
-                <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-phone me-1"></i>Liên hệ</a></li>
+                <li class="nav-item"><a class="nav-link" href="donhang.php"><i class="fa-solid fa-clock"></i></i>Dơn Hàng</a></li>
             </ul>
             
             <form action="result.php" method="get" class="d-none d-lg-flex">

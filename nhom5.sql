@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 12, 2024 lúc 01:48 AM
+-- Thời gian đã tạo: Th12 18, 2024 lúc 11:49 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -38,11 +38,10 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id_user`, `id_product`, `soluong`) VALUES
-(5, 95, 1),
-(5, 10, 2),
 (6, 10, 1),
 (6, 1, 2),
-(6, 82, 1);
+(6, 82, 1),
+(5, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -52,8 +51,8 @@ INSERT INTO `carts` (`id_user`, `id_product`, `soluong`) VALUES
 
 CREATE TABLE `manufactures` (
   `id_manu` int(11) NOT NULL,
-  `name_manu` varchar(200) NOT NULL,
-  `icon` varchar(200) NOT NULL,
+  `name_manu` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -67,6 +66,51 @@ INSERT INTO `manufactures` (`id_manu`, `name_manu`, `icon`, `created_at`) VALUES
 (3, 'Apple', '', '2024-12-05'),
 (4, 'Realme', '', '2024-12-05'),
 (5, 'Sony', '', '2024-12-05');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `tongtien` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `payments`
+--
+
+INSERT INTO `payments` (`id`, `id_user`, `tongtien`, `created_at`) VALUES
+(11, 5, 6990000, '2024-12-18 00:00:00'),
+(12, 5, 4690000, '2024-12-18 17:33:53');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `payment_details`
+--
+
+CREATE TABLE `payment_details` (
+  `id` int(11) NOT NULL,
+  `payment_id` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `soluong` int(11) NOT NULL,
+  `price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `payment_details`
+--
+
+INSERT INTO `payment_details` (`id`, `payment_id`, `id_product`, `soluong`, `price`) VALUES
+(4, 11, 10, 2, 4800000),
+(5, 11, 81, 1, 2190000),
+(6, 12, 1, 1, 2400000),
+(7, 12, 64, 1, 2290000);
 
 -- --------------------------------------------------------
 
@@ -184,8 +228,8 @@ INSERT INTO `products` (`id`, `name`, `manu_id`, `price`, `image`, `description`
 
 CREATE TABLE `protypes` (
   `id_type` int(11) NOT NULL,
-  `name_type` varchar(200) NOT NULL,
-  `icon` varchar(200) NOT NULL,
+  `name_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -236,6 +280,18 @@ ALTER TABLE `manufactures`
   ADD PRIMARY KEY (`id_manu`);
 
 --
+-- Chỉ mục cho bảng `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `payment_details`
+--
+ALTER TABLE `payment_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
@@ -265,16 +321,28 @@ ALTER TABLE `manufactures`
   MODIFY `id_manu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT cho bảng `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT cho bảng `payment_details`
+--
+ALTER TABLE `payment_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT cho bảng `protypes`
 --
 ALTER TABLE `protypes`
-  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

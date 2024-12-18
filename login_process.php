@@ -41,6 +41,7 @@ if ($result->num_rows > 0) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['role'] = $user['role'];
+        $_SESSION['email'] = $user['email'];
 
         // Chuyển hướng đến trang chính (ví dụ trang index.php)
         header("Location: index.php");

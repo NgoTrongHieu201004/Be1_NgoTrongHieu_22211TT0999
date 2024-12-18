@@ -45,6 +45,19 @@ class Carts extends db
         }
         $sql->close();
     }
+    public function XoaCart_idUser($id_user)
+    {
+        // Chuẩn bị câu lệnh SQL với dấu hỏi thay cho tham số
+        $sql = self::$connection->prepare("DELETE FROM carts WHERE id_user = ? ");
+        $sql->bind_param("i", $id_user);
+        $sql->execute();
+        if ($sql->affected_rows > 0) {
+            echo "Xóa thành công!";
+        } else {
+            echo "Không tìm thấy sản phẩm trong giỏ hàng để xóa.";
+        }
+        $sql->close();
+    }
 
     public function SuaCart($id_user, $id_product, $soluong)
     {
