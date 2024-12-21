@@ -1,4 +1,5 @@
-<?php session_start();?>
+<?php
+session_start();?>
 <?php
 require "config.php";
 require "./public/models/db.php";

@@ -220,4 +220,20 @@ class Products extends db
         $products = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $products;
     }
+
+    public function HienThiSanPhamBanChay($count)
+{
+    $sql = self::$connection->prepare("SELECT products.*, SUM(payment_details.soluong) AS total_sold 
+        FROM products 
+        JOIN payment_details 
+        ON products.id = payment_details.id_product 
+        GROUP BY products.id
+        ORDER BY total_sold DESC 
+        LIMIT $count
+    ");
+    $sql->execute(); // Execute the query
+    $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC); // Fetch results as associative array
+    return $items; // Return the top 3 products
+}
+
 }
