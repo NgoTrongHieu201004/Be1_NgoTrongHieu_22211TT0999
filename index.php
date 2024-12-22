@@ -8,19 +8,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/style.css">
-
 </head>
 
-<body>
 
+<body>
 
     <!-- Navbar -->
     <?php include "header.php"; ?>
 
-
-
-    <!-- Banner -->
-    <div class="container">
+     <!-- Banner -->
+     <div class="container">
         <div class="banner animated-card">
             <div class="row align-items-center">
                 <div class="col-lg-8">
@@ -63,59 +60,74 @@
         </div>
     </div>
 
+
+
     <!-- Products -->
-    <?php
-
-    $productsList = $products->HienThiSanPhamMoi(0, 3);
-
-    // Sắp xếp sản phẩm theo ngày tạo (mới nhất lên đầu)
-    usort($productsList, function ($a, $b) {
-        $dateA = new DateTime($a['create_at']);
-        $dateB = new DateTime($b['create_at']);
-        return $dateB <=> $dateA; // Sắp xếp giảm dần theo ngày tạo
-    });
-    ?>
-
     <div class="container my-5" id="products">
         <h2 class="text-center mb-4">Sản Phẩm Nổi Bật</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-
+        <div class="row row-cols-1 row-cols-md-3 g-4" id="product-list">
             <?php
+            $productsList = $products->HienThiSanPhamMoi(0, 90);
+            usort($productsList, function ($a, $b) {
+                $dateA = new DateTime($a['create_at']);
+                $dateB = new DateTime($b['create_at']);
+                return $dateB <=> $dateA; // Sắp xếp giảm dần theo ngày tạo
+            });
             foreach($productsList as $a => $values):
-                ?>
-
-                <!-- Product 1 -->
-                <div class="col">
+            ?>
+                <div class="col product-item">
                     <div class="card h-100 product-card">
                         <div class="position-relative">
                             <img src="public/img/<?php echo $values['image'] ?>" class="card-img-top" alt="iPhone">
-                            <span
-                                class="category-badge"><?php echo $type->HienThiMotType($values['type_id'])[0]['name_type'] ?></span>
+                            <span class="category-badge"><?php echo $type->HienThiMotType($values['type_id'])[0]['name_type'] ?></span>
                         </div>
                         <div class="card-body">
-                            <a class="h5 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none"
-                                href="single.php?id=<?php echo $values['id'] ?>"><?php echo $values['name'] ?></a>
+                            <a class="h5 d-block mb-3 text-secondary text-uppercase font-weight-bold text-decoration-none" href="single.php?id=<?php echo $values['id'] ?>"><?php echo $values['name'] ?></a>
                             <p class="card-text">Chip A17 Pro, Camera 48MP, Pin 4422 mAh</p>
                             <div class="price-tag"><?php echo number_format($values['price'], 0, '', '.') ?>₫</div>
-                            <a
-                                href="./public/xulyCRUD/xulythemcart.php?idUser=<?php echo $idUser ?>&idProduct=<?php echo $values['id'] ?>">
-                                <button class="btn btn-primary w-100"><i class="fas fa-shopping-cart me-2"></i>Thêm vào
-                                    giỏ</button>
+                            <a href="./public/xulyCRUD/xulythemcart.php?idUser=<?php echo $idUser ?>&idProduct=<?php echo $values['id'] ?>">
+                                <button class="btn btn-primary w-100"><i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ</button>
                             </a>
                         </div>
                     </div>
                 </div>
-                <?php
-            endforeach;
-            ?>
-
+            <?php endforeach; ?>
         </div>
     </div>
 
     <!-- Footer -->
-    <?php include "footer.php" ?>
+    <?php include "footer.php"; ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+       
+        let currentIndex = 0;
+        const products = document.querySelectorAll('.product-item');
+        const totalProducts = products.length;
+
+        function showNextProducts() {
+           
+            products.forEach(product => {
+                product.style.display = 'none';
+            });
+
+            
+            for (let i = 0; i < 3; i++) {
+                const index = (currentIndex + i) % totalProducts; 
+                products[index].style.display = 'block';
+            }
+
+            
+            currentIndex = (currentIndex + 3) % totalProducts;
+        }
+
+        
+        showNextProducts();
+
+        
+        setInterval(showNextProducts, 5000);
+    </script>
 </body>
 
 </html>
