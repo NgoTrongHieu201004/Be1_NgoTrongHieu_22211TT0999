@@ -12,6 +12,8 @@
                         <span>ProType</span></a></li>
                 <li> <a href="users.php"><i class="icon icon-th-list"></i>
                         <span>Users</span></a></li>
+                <li> <a href="donhang.php"><i class="icon icon-th-list"></i>
+                        <span>Payments</span></a></li>
 
             </ul>
         </div>

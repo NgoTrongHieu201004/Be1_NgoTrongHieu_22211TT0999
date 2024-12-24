@@ -83,6 +83,7 @@ class Product extends Db
     }
 
 
+    // phân trang tìm kiếm product
     public function PaginateVer($url, $total, $perPage, $offset, $page)
     {
         // Nếu tổng số sản phẩm <= 0, không có phân trang
@@ -140,7 +141,64 @@ class Product extends Db
         // Trả về chuỗi HTML hoàn chỉnh
         return $prevLink . $link . $nextLink;
     }
+    //phan trang product
+    public function PaginateVer2($url, $total, $perPage, $offset, $page)
+    {
+        // Nếu tổng số sản phẩm <= 0, không có phân trang
+        if ($total <= 0)
+            return "";
 
+        // Tổng số trang
+        $totalLinks = ceil($total / $perPage);
+
+        // Nếu chỉ có 1 trang, không cần phân trang
+        if ($totalLinks <= 1)
+            return "";
+
+        // Điều chỉnh $page nằm trong phạm vi hợp lệ
+        if ($page < 1)
+            $page = 1;
+        if ($page > $totalLinks)
+            $page = $totalLinks;
+
+        // Xác định phạm vi trang hiển thị
+        $from = $page - $offset;
+        $to = $page + $offset;
+
+        // Đảm bảo $from và $to không vượt quá giới hạn
+        if ($from < 1) {
+            $from = 1;
+            $to = min($offset * 2, $totalLinks);
+        }
+        if ($to > $totalLinks) {
+            $to = $totalLinks;
+            $from = max(1, $totalLinks - $offset * 2 + 1);
+        }
+
+        // Liên kết trước
+        $prevLink = "";
+        if ($page > 1) {
+            $prev = $page - 1;
+            $prevLink = "<li class='page-item'><a class='page-link' href='$url?page=$prev'>Trước</a></li>";
+        }
+
+        // Liên kết tiếp
+        $nextLink = "";
+        if ($page < $totalLinks) {
+            $next = $page + 1;
+            $nextLink = "<li class='page-item'><a class='page-link' href='$url?page=$next'>Tiếp</a></li>";
+        }
+
+        // Tạo các liên kết phân trang
+        $link = "";
+        for ($i = $from; $i <= $to; $i++) {
+            $activeClass = ($i == $page) ? " active" : ""; // Trang hiện tại
+            $link .= "<li class='page-item$activeClass'><a class='page-link' href='$url?page=$i'>$i</a></li>";
+        }
+
+        // Trả về chuỗi HTML hoàn chỉnh
+        return $prevLink . $link . $nextLink;
+    }
 
      public function SreachAllItemBy($key){
         $name = '%'.$key.'%';

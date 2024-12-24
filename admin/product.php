@@ -43,7 +43,7 @@ include "sidebar.php";
                                 $perPage = 5;
                                 // Lấy tổng số sản phẩm
                                 $total = count($products->HienThiSanPhamMoiAdmin()); // Cập nhật hàm getAllProducts để lấy tổng số sản phẩm
-                                $PaginateVer = $products->PaginateVer($url, $total, $perPage, 3, $page);
+                                $PaginateVer = $products->PaginateVer2($url, $total, $perPage, 3, $page);
                                 foreach ($products->getProductsByLimit($page, $perPage) as $key => $values):
                                     ?>
 

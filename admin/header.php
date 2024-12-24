@@ -26,6 +26,7 @@ if($_SESSION['role'] != 1){
         <link
             href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'
             rel='stylesheet' type='text/css'>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style type="text/css">
         ul.pagination {
             list-style: none;
@@ -51,18 +52,20 @@ if($_SESSION['role'] != 1){
         require "models/manufacture.php";
         require "models/protype.php";
         require "models/user.php";
+        require "models/thanhtoan.php";
         $products = new Product; 
         $manufacture = new Manufacture; 
         $protype = new Protype ; 
         $user = new User();
+        $thanhtoan = new ThanhToan();
         ?>
         <!--Header-part-->
-        <div id="header">
+        <div id="header" class="">
             <h1><a href="#"><img src="./images/logo.png" alt=""></a></h1>
         </div>
         <!--close-Header-part-->
         <!--top-Header-menu-->
-        <div id="user-nav" class="navbar navbar-inverse">
+        <div id="user-nav" class="navbar navbar-inverse " >
             <ul class="nav">
                 <li class="dropdown" id="profile-messages"><a title="" href="#"
                         data-toggle="dropdown"
