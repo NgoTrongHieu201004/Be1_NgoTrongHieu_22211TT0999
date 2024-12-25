@@ -5,10 +5,10 @@ class Manufactures extends db
     public function HienThiManu()
     {
         $sql = self::$connection->prepare("SELECT * FROM manufactures");
-        $sql->execute(); //return an object
+        $sql->execute();
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $items; //return an array
+        return $items;
     }
     public function HienThiMotManu($id)
     {
@@ -17,6 +17,6 @@ class Manufactures extends db
         $sql->execute();
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $items; //return an array
+        return $items;
     }
 }
