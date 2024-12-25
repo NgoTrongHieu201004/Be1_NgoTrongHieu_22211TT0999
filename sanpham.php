@@ -111,7 +111,7 @@ if (isset($_GET['messagethongbao'])) {
                                         </div>
                                         <div class="card-body">
                                             <a class="h5 d-block mb-3 text-secondary text-uppercase font-weight-bold  text-decoration-none"
-                                                href="single.php?id=<?php echo $values['id'] ?>"><?php echo $values['name'] ?></a>
+                                                href="single.php?id=<?php echo $values['id']?>&type_id=<?php echo $values['type_id']?>&manu_id=<?php echo $values['manu_id']?> "><?php echo $values['name'] ?></a>
 
                                             <div class="price-tag">
                                                 <?php echo number_format($values['price'], 0, '', '.') ?>₫

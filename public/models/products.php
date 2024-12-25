@@ -236,4 +236,40 @@ class Products extends db
     return $items; // Return the top 3 products
 }
 
+ public function HienThiSanPhamLienQuan($id,$type_id,$manu_id){
+    $sql = self::$connection->prepare("SELECT DISTINCT *
+                                       FROM `products`
+                                       WHERE `products`.`type_id` = ? AND `products`.`manu_id` = ? AND `products`.`id` NOT LIKE ?
+                                       ORDER BY `products`.`create_at`DESC
+");
+    $sql->bind_param("iii",$type_id,$manu_id,$id);
+    $sql->execute();
+    $products = array();
+    $products = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $products;
+ }
+ public function HienThiSanPhamLienQuan2 ($id, $type_id ){
+        
+    if($type_id ==1 ){
+        $type1=4;
+        $type2=5;
+    }else if($type_id ==4){
+        $type1=1;
+        $type2=5;
+    }else{
+        $type1=1;
+        $type2=4;
+    }
+    
+  
+    $sql = self::$connection->prepare("SELECT DISTINCT *
+                                       FROM `products`
+                                       WHERE `products`.`type_id` = ? AND `products`.`type_id` = ? OR `products`.`type_id` = ? AND `products`.`id` NOT LIKE ?
+                                       ORDER BY `products`.`create_at`DESC");
+    $sql->bind_param("iiii",$type_id,$type1,$type2,$id);
+    $sql->execute();
+    $products = array();
+    $products = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $products ; 
+ }
 }
