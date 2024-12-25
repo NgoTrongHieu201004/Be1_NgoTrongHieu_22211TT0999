@@ -5,11 +5,10 @@ class ThanhToan extends db{
     public function ThemSanPhamThanhToan($payment_id, $id_product, $soluong, $price)
     {
         $sql = self::$connection->query("INSERT INTO `payment_details`(`payment_id`, `id_product`, `soluong`, `price`) VALUES ('$payment_id',' $id_product','$soluong','$price')");
-        // Kiểm tra và trả về kết quả
         if ($sql) {
-            return true; // Truy vấn thành công
+            return true; 
         } else {
-            return false; // Truy vấn thất bại
+            return false;
         }
     }
     public function ThemDonThanhToan($id_user, $tongtien)
@@ -25,8 +24,8 @@ class ThanhToan extends db{
     public function HienThiDon($id_user)
     {
         $sql = self::$connection->prepare("SELECT * FROM payments WHERE id_user = ? ORDER BY created_at DESC");
-        $sql->bind_param("i", $id_user); // "i" là kiểu dữ liệu Integer
-        $sql->execute(); // Thực thi câu lệnh SQL
+        $sql->bind_param("i", $id_user);
+        $sql->execute(); 
         $items = array();
         $result = $sql->get_result();
         $items = $result->fetch_all(MYSQLI_ASSOC);
@@ -36,8 +35,8 @@ class ThanhToan extends db{
 public function HienThiSanPhamTheoDon($id_payment)
 {
     $sql = self::$connection->prepare("SELECT * FROM payment_details WHERE payment_id = ?");
-    $sql->bind_param("i", $id_payment); // "i" là kiểu dữ liệu Integer
-    $sql->execute(); // Thực thi câu lệnh SQL
+    $sql->bind_param("i", $id_payment); 
+    $sql->execute(); 
     $items = array();
     $result = $sql->get_result();
     $items = $result->fetch_all(MYSQLI_ASSOC);
@@ -49,7 +48,7 @@ public function HienThiSanPhamTheoDon($id_payment)
         if (mysqli_query($this->conn, $query)) {
             return mysqli_insert_id($this->conn);  
         }
-        return false;  // In case of failure
+        return false;
     }
     
 }

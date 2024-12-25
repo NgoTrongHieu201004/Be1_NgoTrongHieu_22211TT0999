@@ -10,32 +10,6 @@ include "sidebar.php";
     </div>
     <div class="container">
     <hr>
-         <!-- Card chứa ComboBox chọn tháng -->
-         <div class="card">
-            <div class="card-header">
-                <h4 class="mb-0">Chọn Tháng</h4>
-            </div>
-            <div class="card-body">
-                <form>
-                    <label for="monthSelect" class="form-label">Chọn tháng:</label>
-                    <select id="monthSelect" name="month" class="form-select" aria-label="Chọn tháng">
-                        <option value="13">Mới nhất</option>
-                        <option value="01">Tháng 1</option>
-                        <option value="02">Tháng 2</option>
-                        <option value="03">Tháng 3</option>
-                        <option value="04">Tháng 4</option>
-                        <option value="05">Tháng 5</option>
-                        <option value="06">Tháng 6</option>
-                        <option value="07">Tháng 7</option>
-                        <option value="08">Tháng 8</option>
-                        <option value="09">Tháng 9</option>
-                        <option value="10">Tháng 10</option>
-                        <option value="11">Tháng 11</option>
-                        <option value="12">Tháng 12</option>
-                    </select>
-                </form>
-            </div>
-        </div>
 
         <!-- Card chứa Danh Sách Đơn Hàng -->
         <div class="card">
@@ -46,20 +20,44 @@ include "sidebar.php";
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Tên Người Đặt</th>
-                            <th>Số Tiền</th>
-                            <th>Ngày Đơn Hàng</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Price</th>
+                            <th>created_at</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="orderList">
-                        <a href="#"> <tr>     
-                            <td>Nguyễn Văn A</td>
-                            <td>500,000 VND</td>
-                            <td>2024-01-15</td>
+                        
+                         <?php
+                                $url = $_SERVER['PHP_SELF'];
+                                $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+                                $perPage = 5;
+                                // Lấy tổng số sản phẩm
+                                $total = count($thanhtoan->HienThiAll()); // Cập nhật hàm getAllProducts để lấy tổng số sản phẩm
+                                $PaginateVer = $thanhtoan->PaginateVerPayments($url, $total, $perPage, 3, $page);
+                                foreach ($thanhtoan->getAllsByLimit($page, $perPage) as $key => $values):
+                                    ?>
+                        <tr>
+                            <td><?php echo $user->getUser($values['id_user'])[0]['username'] ?></td>
+                            <td><?php echo $user->getUser($values['id_user'])[0]['email'] ?></td>
+                            <td><?php echo number_format($values['tongtien'], 0, ',', '.') ?> VNĐ</td>
+                            <td><?php echo $values['created_at'] ?></td>
+                            <td><a href="payments_detail.php?id=<?php echo $values['id']; ?>" class="btn
+                                    btn-success btn-mini">detail</a></td>
                         </tr> 
-                        </a>
+                        <?php endforeach?>
                     </tbody>
                 </table>
+                <div class="row" style="margin-left: 18px;">
+                            <div class="col-12">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-center">
+                                        <?php echo $PaginateVer; ?>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
             </div>
         </div>
     </div>
@@ -72,39 +70,3 @@ include "sidebar.php";
 
 
 <?php include "footer.php"; ?>
-<script>
-    document.getElementById("monthSelect").addEventListener("change", function() {
-    var month = this.value;  // Lấy giá trị tháng đã chọn
-    fetchOrders(month);
-});
-
-function fetchOrders(month) {
-    // Gửi yêu cầu Ajax để lấy dữ liệu đơn hàng theo tháng
-    fetch('your_php_script.php?month=' + month)
-        .then(response => response.json())
-        .then(data => {
-            var orderList = document.getElementById("orderList");
-            orderList.innerHTML = ""; // Xóa danh sách cũ
-
-            // Kiểm tra nếu có đơn hàng
-            if (data.length === 0) {
-                orderList.innerHTML = "<tr><td colspan='3'>Không có đơn hàng cho tháng này</td></tr>";
-            } else {
-                // Hiển thị các đơn hàng
-                data.forEach(order => {
-                    var row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td>${order.order_date}</td>
-                        <td>${order.customer_name}</td>
-                        <td>${order.total_amount}</td>
-                    `;
-                    orderList.appendChild(row);
-                });
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching orders:", error);
-        });
-}
-
-</script>
